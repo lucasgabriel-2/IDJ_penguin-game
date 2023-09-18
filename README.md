@@ -1,4 +1,4 @@
-# Game - Let's get the aliens (The penguin's Game)
+# Game - Let's get the aliens (The penguin Game)
 
 ## Aluno
 
