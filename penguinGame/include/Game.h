@@ -23,7 +23,7 @@ class Game{
         SDL_Window* window;
         SDL_Renderer* renderer;
         State* state;
-
+        
         string Title;
         int Width;
         int Height;

@@ -5,6 +5,9 @@
 #include <iostream>
 #include "../include/Game.h"
 
+#include <cstdlib>
+#include <ctime>
+
 using std::string;
 using std::cout;
 
@@ -65,6 +68,8 @@ Game::Game(string title, int width, int height){
     }
 
     state = new State();
+
+    srand(time(NULL));
 }
 
 Game::~Game(){

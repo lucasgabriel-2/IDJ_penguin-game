@@ -7,13 +7,13 @@
 using std::string;
 using std::cout;
 
-Sprite::Sprite(){
-
-    texture = nullptr;
+Sprite::Sprite(GameObject& associated) : Component(associated){
+    
+    texture = nullptr; 
 
 }
 
-Sprite::Sprite(string file){
+Sprite::Sprite(GameObject& associated, string file) : Component(associated){
 
     texture = nullptr;
     Open(file);
@@ -31,7 +31,10 @@ Sprite::~Sprite(){
 
 void Sprite::Open(string file){
     
-    Sprite::~Sprite();
+    if(texture != nullptr){
+        texture = nullptr;
+        SDL_DestroyTexture(texture);
+    }
 
     Game& penguinGame = Game::GetInstance();
 
@@ -56,16 +59,20 @@ void Sprite::SetClip(int x, int y, int w, int h){
     clipRect.y = y;
     clipRect.w = w;
     clipRect.h = h;
+
+    this->associated.box.x = x;
+    this->associated.box.y = y;
+    this->associated.box.w = w;
+    this->associated.box.h = h;
 }
 
-void Sprite::Render(int x, int y){
+void Sprite::Render(){
 
     SDL_Rect dst;
-    dst.x = x;
-    dst.y = y;
-    dst.w = clipRect.w;
-    dst.h = clipRect.h;
-
+    dst.x = associated.box.x;
+    dst.y = associated.box.y;
+    dst.w = associated.box.w;
+    dst.h = associated.box.h;
 
     Game& penguinGame = Game::GetInstance();
 
@@ -83,4 +90,12 @@ int Sprite::GetHeight(){
 
 bool Sprite::IsOpen(){
     return (texture != nullptr) ? true : false;
+}
+
+void Sprite::Update(float dt){
+
+}
+
+bool Sprite::Is(string type){
+    return (type == "Sprite") ? true : false;
 }
