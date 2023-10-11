@@ -2,6 +2,7 @@
 
 GameObject::GameObject(){
     isDead = false;
+    almostDead = false;
 }
 
 GameObject::~GameObject(){

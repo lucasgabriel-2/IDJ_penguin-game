@@ -49,7 +49,7 @@ void State::Update(float dt){
 
 
     for(long unsigned int i = 0; i < objectArray.size(); i++){
-        if(objectArray[i]->IsDead()){
+        if(objectArray[i]->IsDead() && !objectArray[i]->almostDead){
             objectArray.erase(objectArray.begin()+i);
         }        
     }
@@ -131,8 +131,6 @@ void State::AddObject(int mouseX, int mouseY){
 
 	firstEnemy->box.x = mouseX;
 	firstEnemy->box.y = mouseY;
-	// firstEnemy->box.w = 100;
-	// firstEnemy->box.h = 100;
 
     Sound* enemySound = new Sound(*firstEnemy,"audio/boom.wav");;
 	firstEnemy->AddComponent(enemySound);

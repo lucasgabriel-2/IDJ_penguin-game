@@ -23,7 +23,6 @@ class Sound : public Component{
         void Render();
         bool Is(string type);
         int getChannel();
-        int isPlaying = 1;
 
     private:
 

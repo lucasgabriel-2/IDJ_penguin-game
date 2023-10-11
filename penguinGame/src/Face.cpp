@@ -11,6 +11,11 @@ Face::Face(GameObject& associated) : Component (associated){
 }
 
 void Face::Damage(int damage){
+
+    if(this->associated.almostDead == true){
+        return;
+    }
+
     hitpoints = hitpoints - damage;
 
     if(hitpoints <= 0){
@@ -19,22 +24,17 @@ void Face::Damage(int damage){
         Sound* damageSound = (Sound*) this->associated.GetComponent("Sound");
 
         if(damageSound != nullptr){
-            damageSound->isPlaying = 1;
             damageSound->Play();
-
-            while(damageSound->isPlaying == 1){
-                damageSound->isPlaying = Mix_Playing(damageSound->getChannel());
-            }
-
-            associated.RemoveComponent(penguinFace);
+            this->associated.almostDead = true;
+            this->associated.RemoveComponent(penguinFace);
         }
     }
 }
 
 void Face::Update(float dt){
     Sound* damageSound = (Sound*) this->associated.GetComponent("Sound");
-    
-    if( damageSound->isPlaying == 0){
+    if(this->associated.almostDead == true && !Mix_Playing(damageSound->getChannel())){  
+        this->associated.almostDead = false;
         this->associated.RequestDelete();
     }
 }

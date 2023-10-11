@@ -25,6 +25,7 @@ class GameObject{
         void RemoveComponent(Component* cpt);
         Component* GetComponent (string type);
         Rect box;
+        bool almostDead;
 
     private:
 
