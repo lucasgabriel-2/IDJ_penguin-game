@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "../include/Game.h"
+#include "../include/Resources.h"
 #include <SDL2/SDL_image.h>
 
 using std::string;
@@ -22,31 +23,14 @@ Sprite::Sprite(GameObject& associated, string file) : Component(associated){
 
 Sprite::~Sprite(){
     
-    if(texture != nullptr){
-        texture = nullptr;
-        SDL_DestroyTexture(texture);
-    }
 
 }
 
 void Sprite::Open(string file){
     
-    if(texture != nullptr){
-        texture = nullptr;
-        SDL_DestroyTexture(texture);
-    }
-
-    Game& penguinGame = Game::GetInstance();
-
-    texture = IMG_LoadTexture(penguinGame.GetRenderer(), &file[0]); 
-
-    if(texture == nullptr){
-        SDL_Log("Error in SDL_Init: %s", SDL_GetError());
-        cout << "Error in IMG_LoadTexture" << "\n";
-    }
+    texture = Resources::GetImage(&file[0]);
 
     SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
-
 
     //TODO set the right parameter in SetClip()
     SetClip(0,0,width,height);
@@ -78,6 +62,20 @@ void Sprite::Render(){
 
     SDL_RenderCopy(penguinGame.GetRenderer(), texture, &clipRect, &dst);
 }
+
+void Sprite::Render(int x, int y){
+
+    SDL_Rect dst;
+    dst.x = x;
+    dst.y = y;
+    dst.w = associated.box.w;
+    dst.h = associated.box.h;
+
+    Game& penguinGame = Game::GetInstance();
+
+    SDL_RenderCopy(penguinGame.GetRenderer(), texture, &clipRect, &dst);
+}
+
 
 int Sprite::GetWidth(){
     return width;

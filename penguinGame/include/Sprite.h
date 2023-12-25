@@ -11,13 +11,14 @@ using std::string;
 class Sprite : public Component{
 
     public:
-
+    
         Sprite(GameObject& associated);
         Sprite(GameObject& associated, string file);
         ~Sprite();
         void Open(string file);
         void SetClip (int x, int y, int w, int h);
         void Render();
+        void Render(int x, int y);
         int GetWidth();
         int GetHeight();
         bool IsOpen();

@@ -4,21 +4,29 @@
 #include "../include/Sound.h"
 
 #include "../include/Sprite.h"
+#include "../include/TileMap.h"
+#include "../include/TileSet.h"
 
-#define PI 3.14159265358979323846
+#define PI  M_PI
 
 State::State(){
 
     quitRequested = false;
 
 	GameObject* bg = new GameObject();
-	Sprite* bgSprite = new Sprite(*bg,"img/ocean.jpg");;
+	Sprite* bgSprite = new Sprite(*bg,"img/ocean.jpg");
 	bg->AddComponent(bgSprite);
-
 	bg->box.x = 0;
 	bg->box.y = 0;
-
 	objectArray.emplace_back(bg);
+
+	GameObject *gameTiles = new GameObject();
+	TileSet* gameTileSet = new TileSet (64, 64, "img/tileset.png");
+	TileMap* gameTileMap = new TileMap(*gameTiles, "map/tileMap.txt", gameTileSet);
+	gameTiles->AddComponent(gameTileMap);
+	gameTiles->box.x = 0;
+	gameTiles->box.y = 0;	
+	objectArray.emplace_back(gameTiles);
 
     music = new Music("audio/stageState.ogg");
     
