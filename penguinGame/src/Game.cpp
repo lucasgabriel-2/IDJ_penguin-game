@@ -5,6 +5,7 @@
 #include <iostream>
 #include "../include/Game.h"
 #include "../include/Resources.h"
+#include "../include/InputManager.h"
 
 #include <cstdlib>
 #include <ctime>
@@ -96,7 +97,11 @@ SDL_Renderer* Game::GetRenderer(){
 void Game::Run(){
 
     state->LoadAssets();
+    InputManager &inputManager = InputManager::GetInstance();
+
     while(state->QuitRequested() != true){
+        CalculateDeltaTime();
+        inputManager.Update();
         //TODO set the right parameter in Update
         state->Update(0);
         state->Render();
@@ -107,4 +112,17 @@ void Game::Run(){
     Resources::ClearImages();
     Resources::ClearMusics();
     Resources::ClearSounds();
+}
+
+float Game::CalculateDeltaTime(){
+    
+    int frameEnd = SDL_GetTicks();
+    dt = (float) (frameEnd - frameStart) / 1000.0f; 
+    frameStart = frameEnd;
+    return dt;
+}
+
+
+float Game::GetDeltaTime(){
+    return dt;
 }

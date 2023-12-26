@@ -1,4 +1,5 @@
 #include "../include/TileMap.h"
+#include "../include/Camera.h"
 
 #include <fstream>
 #include <sstream>
@@ -63,8 +64,8 @@ void TileMap::RenderLayer(int layer, int cameraX, int cameraY){
         for(int j = 0; j < mapHeight; j++){
             
             int tileIndex = At(i, j, layer);
-            int columnSize = tileSet->GetTileWidth();
-            int rowSize = tileSet->GetTileHeight();
+            int columnSize = tileSet->GetTileWidth() - cameraX;
+            int rowSize = tileSet->GetTileHeight() - cameraY;
             tileSet->RenderTile(tileIndex, i * columnSize, j * rowSize);
         }
     }    
@@ -72,7 +73,7 @@ void TileMap::RenderLayer(int layer, int cameraX, int cameraY){
 
 void TileMap::Render(){
     for(int i = 0; i < mapDepth; i++){
-        RenderLayer(i, 0, 0);
+        RenderLayer(i, Camera::pos.x, Camera::pos.y);
     }
 }
 

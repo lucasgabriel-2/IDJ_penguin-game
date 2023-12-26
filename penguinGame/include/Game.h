@@ -28,5 +28,10 @@ class Game{
         int Width;
         int Height;
 
+        int frameStart;
+        float dt;
+        float CalculateDeltaTime();
+        float GetDeltaTime();
+
 };
 

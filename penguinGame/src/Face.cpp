@@ -1,6 +1,8 @@
 #include "../include/Face.h"
 #include "../include/Sound.h"
 #include "../include/Sprite.h"
+#include "../include/InputManager.h"
+#include "../include/Camera.h"
 
 #include <iostream>
 
@@ -33,6 +35,17 @@ void Face::Damage(int damage){
 
 void Face::Update(float dt){
     Sound* damageSound = (Sound*) this->associated.GetComponent("Sound");
+
+    InputManager& inputManager = InputManager::GetInstance();
+    if(inputManager.MousePress(LEFT_MOUSE_BUTTON) || inputManager.MousePress(RIGHT_MOUSE_BUTTON)){
+
+        int mouseX= inputManager.GetMouseX();
+        int mouseY= inputManager.GetMouseY();
+        if(associated.box.Contains( {(float)mouseX - Camera::pos.x , (float)mouseY - Camera::pos.y} )){
+            this->Damage(std::rand() % 10 + 10);
+        }
+    }
+    
     if(this->associated.almostDead == true && !Mix_Playing(damageSound->getChannel())){  
         this->associated.almostDead = false;
         this->associated.RequestDelete();
