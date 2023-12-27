@@ -3,6 +3,7 @@
 
 #include "../include/Game.h"
 #include "../include/Resources.h"
+#include "../include/Camera.h"
 #include <SDL2/SDL_image.h>
 
 using std::string;
@@ -53,8 +54,8 @@ void Sprite::SetClip(int x, int y, int w, int h){
 void Sprite::Render(){
 
     SDL_Rect dst;
-    dst.x = associated.box.x;
-    dst.y = associated.box.y;
+    dst.x = associated.box.x - Camera::pos.x;
+    dst.y = associated.box.y - Camera::pos.y;
     dst.w = associated.box.w;
     dst.h = associated.box.h;
 

@@ -41,7 +41,7 @@ void Face::Update(float dt){
 
         int mouseX= inputManager.GetMouseX();
         int mouseY= inputManager.GetMouseY();
-        if(associated.box.Contains( {(float)mouseX - Camera::pos.x , (float)mouseY - Camera::pos.y} )){
+        if(associated.box.Contains( {(float)mouseX + Camera::pos.x , (float)mouseY + Camera::pos.y} )){
             this->Damage(std::rand() % 10 + 10);
         }
     }

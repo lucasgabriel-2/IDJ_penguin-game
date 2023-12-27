@@ -4,7 +4,7 @@
 
 GameObject* Camera::focus = nullptr;
 Vec2 Camera::pos = Vec2(0, 0);
-Vec2 Camera::speed = Vec2(30, 30);
+Vec2 Camera::speed = Vec2(130, 130);
 
 void Camera::Follow(GameObject* newFocous){
     

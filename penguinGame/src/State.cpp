@@ -8,6 +8,7 @@
 #include "../include/TileSet.h"
 #include "../include/InputManager.h"
 #include "../include/Camera.h"
+#include "../include/CameraFollower.h"
 
 #define PI  M_PI
 
@@ -21,6 +22,12 @@ State::State(){
 	bg->box.x = 0;
 	bg->box.y = 0;
 	objectArray.emplace_back(bg);
+
+    CameraFollower* cameraFollower = new CameraFollower(*bg);
+    bg->AddComponent(cameraFollower);
+    bg->box.x = 0;
+    bg->box.y = 0;
+    objectArray.emplace_back(bg);
 
 	GameObject *gameTiles = new GameObject();
 	TileSet* gameTileSet = new TileSet (64, 64, "img/tileset.png");
@@ -62,8 +69,8 @@ void State::Update(float dt){
 		int mouseX = inputManager.GetMouseX();
 		int mouseY = inputManager.GetMouseY();
 		Vec2 objPos;
-		objPos = objPos.AddVectors(Vec2( 200, 0 ).GetRotated( -PI + PI*(rand() % 1001)/500.0 ), Vec2( mouseX - Camera::pos.x , mouseY - Camera::pos.y));
-		AddObject((int)objPos.x - Camera::pos.x, (int)objPos.y - Camera::pos.y);
+		objPos = objPos.AddVectors(Vec2( 200, 0 ).GetRotated( -PI + PI*(rand() % 1001)/500.0 ), Vec2( mouseX , mouseY));
+		AddObject((int)objPos.x, (int)objPos.y);
     }
 
     for(long unsigned int i = 0; i < objectArray.size(); i++){
@@ -158,8 +165,8 @@ void State::AddObject(int mouseX, int mouseY){
 	Sprite* enemyImage = new Sprite(*firstEnemy,"img/penguinface.png");
 	firstEnemy->AddComponent(enemyImage);
 
-	firstEnemy->box.x = mouseX - Camera::pos.x ;
-	firstEnemy->box.y = mouseY - Camera::pos.y;
+	firstEnemy->box.x = mouseX + Camera::pos.x ;
+	firstEnemy->box.y = mouseY + Camera::pos.y;
 
     Sound* enemySound = new Sound(*firstEnemy,"audio/boom.wav");;
 	firstEnemy->AddComponent(enemySound);

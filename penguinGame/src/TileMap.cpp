@@ -64,9 +64,11 @@ void TileMap::RenderLayer(int layer, int cameraX, int cameraY){
         for(int j = 0; j < mapHeight; j++){
             
             int tileIndex = At(i, j, layer);
-            int columnSize = tileSet->GetTileWidth() - cameraX;
-            int rowSize = tileSet->GetTileHeight() - cameraY;
-            tileSet->RenderTile(tileIndex, i * columnSize, j * rowSize);
+            int columnSize = tileSet->GetTileWidth();
+            int rowSize = tileSet->GetTileHeight();
+			int X = (columnSize*i) - cameraX;
+			int Y = (rowSize*j) - cameraY;
+            tileSet->RenderTile(tileIndex, X, Y);
         }
     }    
 }
