@@ -97,8 +97,9 @@ SDL_Renderer* Game::GetRenderer(){
 void Game::Run(){
 
     state->LoadAssets();
-   		InputManager &inputManager = InputManager::GetInstance();
+   	InputManager &inputManager = InputManager::GetInstance();
 
+    state->Start();
     while(state->QuitRequested() != true){
         CalculateDeltaTime();
         inputManager.Update();

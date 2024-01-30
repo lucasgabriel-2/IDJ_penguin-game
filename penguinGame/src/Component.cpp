@@ -19,3 +19,7 @@ void Component::Render(){
 bool Component::Is(string type){
     
 }
+
+void Component::Start(){
+    
+}

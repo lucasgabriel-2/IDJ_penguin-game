@@ -26,6 +26,8 @@ class GameObject{
         Component* GetComponent (string type);
         Rect box;
         bool almostDead;
+        void Start();
+        bool started;
 
     private:
 
