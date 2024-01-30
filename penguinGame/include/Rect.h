@@ -14,6 +14,7 @@ class Rect{
         Rect();
         Rect(float X, float Y, float W, float H);
         bool Contains(Vec2 vec);
-
+        Vec2 Center();
+        void PlaceCenterAt(Vec2 pos);
 
 };

@@ -26,3 +26,12 @@ bool Rect::Contains(Vec2 vec){
     }
 
 }
+
+Vec2 Rect::Center(){
+    return Vec2(x + w/2, y + h/2);
+}
+
+void Rect::PlaceCenterAt(Vec2 pos){
+    x = pos.x - w/2;
+    y = pos.y - h/2;
+}

@@ -40,7 +40,7 @@ State::State(){
 	objectArray.emplace_back(gameTiles);
 
     GameObject *alienGameObject = new GameObject();
-    Alien *alien = new Alien(*alienGameObject, 0);
+    Alien *alien = new Alien(*alienGameObject, 3);
     alienGameObject->AddComponent(alien);
     alienGameObject->box.x = 512;
     alienGameObject->box.y = 300;
