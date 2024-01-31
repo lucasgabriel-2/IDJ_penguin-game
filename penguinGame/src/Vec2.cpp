@@ -13,7 +13,7 @@ Vec2::Vec2(float X, float Y){
     
 }
 
-Vec2 Vec2::GetRotated(float angle) {
+Vec2 Vec2::GetRotated(float angle){
 
 	float X = this->x * cos(angle) - this->y * sin(angle);
 	float Y = this->y * cos(angle) + this->x * sin(angle);
@@ -22,10 +22,22 @@ Vec2 Vec2::GetRotated(float angle) {
 
 }
 
-Vec2 Vec2::AddVectors(Vec2 vector1, Vec2 vector2) {
+Vec2 Vec2::AddVectors(Vec2 vector1, Vec2 vector2){
 
 	Vec2 sum;
 	sum.x = vector1.x + vector2.x;
 	sum.y = vector1.y + vector2.y;
 	return sum;
+}
+
+Vec2 Vec2::SubtractVectors(Vec2 vector1, Vec2 vector2){
+
+	Vec2 sub;
+	sub.x = vector1.x - vector2.x;
+	sub.y = vector1.y - vector2.y;
+	return sub;
+}
+
+float Vec2::GetLength(){
+    return sqrt((x * x) + (y * y));
 }

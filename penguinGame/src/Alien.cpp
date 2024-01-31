@@ -20,8 +20,8 @@ Alien::Action::Action(ActionType type, float x, float y) : type(type), pos(x, y)
 Alien::Alien(GameObject& associated, int nMinions) : Component (associated){
 
     this->nMinions = nMinions;
-    Sprite* sprite = new Sprite(associated, "img/alien.png");
-    associated.AddComponent(sprite);
+    Sprite* alienSprite = new Sprite(associated, "img/alien.png");
+    associated.AddComponent(alienSprite);
 
     speed.x = 100;
     speed.y = 100;
@@ -106,7 +106,12 @@ void Alien::Update(float dt){
             }
             
         }else if(currentAction.type == ActionType::SHOOT){
-            
+
+            int randomMinion = std::rand() % nMinions;
+            shared_ptr<GameObject> sharedMinion = minionArray[randomMinion].lock();
+            Minion* shooterMinion = (Minion*) sharedMinion->GetComponent("Minion");
+            shooterMinion->Shoot(currentAction.pos);
+
             taskQueue.pop();
         }
     }

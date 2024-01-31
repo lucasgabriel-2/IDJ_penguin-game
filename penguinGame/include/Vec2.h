@@ -10,4 +10,6 @@ class Vec2{
         Vec2(float X, float Y);
         Vec2 GetRotated(float angle);
         Vec2 AddVectors(Vec2 vector1, Vec2 vector2);
+        Vec2 SubtractVectors(Vec2 vector1, Vec2 vector2);
+        float GetLength();
 };
