@@ -123,7 +123,7 @@ bool State::QuitRequested(){
 // 	firstEnemy->box.x = mouseX + Camera::pos.x ;
 // 	firstEnemy->box.y = mouseY + Camera::pos.y;
 
-//     Sound* enemySound = new Sound(*firstEnemy,"audio/boom.wav");;
+//     Sound* enemySound = new Sound(*firstEnemy,"audio/boom.wav");
 // 	firstEnemy->AddComponent(enemySound);
     
 //     Face* enemyFace = new Face(*firstEnemy);

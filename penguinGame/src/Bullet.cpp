@@ -9,6 +9,7 @@ Bullet::Bullet(GameObject& associated, float angle, float speed, int damage, flo
     this->speed = Vec2(speed * cos(angle), speed * sin(angle));
     this->distanceLeft = maxDistance;
     this->damage = damage;
+    this->bulletAngle = angle;
 }
 
 void Bullet::Update(float dt){
@@ -23,6 +24,11 @@ void Bullet::Update(float dt){
         associated.RequestDelete();
     }
     
+    Sprite* bulletSprite = (Sprite*) associated.GetComponent("Sprite");
+    if(bulletSprite != nullptr){
+        bulletAngle = atan2(movement.y, movement.x) * (180 / M_PI);
+        bulletSprite->SetAngle(bulletAngle);
+    }
 }
 
 void Bullet::Render(){

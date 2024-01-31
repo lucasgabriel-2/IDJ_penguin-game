@@ -28,6 +28,7 @@ class GameObject{
         bool almostDead;
         void Start();
         bool started;
+        double angleDeg;
 
     private:
 

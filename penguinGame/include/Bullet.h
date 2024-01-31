@@ -17,5 +17,6 @@ class Bullet : public Component{
         Vec2 speed;
         float distanceLeft;
         int damage;
+        float bulletAngle;
 
 };

@@ -23,9 +23,10 @@ Alien::Alien(GameObject& associated, int nMinions) : Component (associated){
     Sprite* alienSprite = new Sprite(associated, "img/alien.png");
     associated.AddComponent(alienSprite);
 
-    speed.x = 100;
-    speed.y = 100;
+    speed.x = 300;
+    speed.y = 300;
     hp = 100;
+    alienAngle = 0;
 
 }
 
@@ -53,6 +54,16 @@ Alien::~Alien(){
 }
 
 void Alien::Update(float dt){
+
+    Sprite* alienSprite = (Sprite*) associated.GetComponent("Sprite");
+    if(alienSprite != nullptr){
+        alienAngle += 1.0;
+        if(alienAngle > 360){
+            alienAngle = 0;
+        }
+        alienSprite->SetAngle(alienAngle);
+    }
+
     InputManager& inputManager = InputManager::GetInstance();
 
     if(inputManager.MousePress(LEFT_MOUSE_BUTTON)){

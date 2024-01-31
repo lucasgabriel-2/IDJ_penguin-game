@@ -12,6 +12,9 @@ Minion::Minion(GameObject& associated, weak_ptr <GameObject> alienCenter, float 
     float arcOffsetRad = arcOffsetDeg * M_PI / 180.0;
     this->arc = arcOffsetRad;
     Sprite* minionSprite = new Sprite(associated, "img/minion.png");
+    double scale = 1 + ((double) (rand()) / RAND_MAX * 0.5);
+    minionSprite->SetScale(scale,scale);
+    minionSprite->SetAngle((M_PI / 2 )* (180 / M_PI));
     associated.AddComponent(minionSprite);
 
 }
@@ -32,6 +35,12 @@ void Minion::Update(float dt){
     Vec2 position;
     position = position.AddVectors(Vec2(200, 0).GetRotated(arc), centerPointer->box.Center());
     associated.box.PlaceCenterAt(position);
+
+    Sprite* minionSprite = (Sprite*) associated.GetComponent("Sprite");
+    if(minionSprite != nullptr){
+        double initialAngle = M_PI / 2 * (180 / M_PI);
+        minionSprite->SetAngle(arc * (180 / M_PI) + initialAngle);
+    }
 }
 
 void Minion::Render(){

@@ -24,6 +24,12 @@ class Sprite : public Component{
         bool IsOpen();
         void Update(float dt);
         bool Is(string type);
+        void SetScale(float scaleX,float scaleY);
+        Vec2 GetScale();
+        double angle;
+        SDL_Point* center;
+        SDL_RendererFlip flip;
+        void SetAngle(double angle);
 
     private:
 
@@ -31,5 +37,6 @@ class Sprite : public Component{
         int  width;
         int height;
         SDL_Rect clipRect;
+        Vec2 scale;
 
 };

@@ -17,6 +17,7 @@ class Alien : public Component{
         void Update(float dt);
         void Render();
         bool Is(string type);
+        double alienAngle;
 
     private:
         
